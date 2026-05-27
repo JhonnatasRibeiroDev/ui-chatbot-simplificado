@@ -1,16 +1,30 @@
 # UI Chatbot Simplificado
 
-Este repositório contém a interface web do projeto **Chatbot Simplificado Multiusuário**, desenvolvida para permitir que usuários conversem com um chatbot baseado em LLM de forma simples e intuitiva.
+Interface web do projeto **Chatbot Simplificado Multiusuário**, desenvolvida para permitir que diferentes usuários conversem com um chatbot baseado em LLM, cada um com sua própria sessão de conversa.
 
-A aplicação cria uma sessão individual para cada usuário, envia mensagens para a API backend, exibe as respostas retornadas pelo chatbot e mantém a experiência visual da conversa.
+A aplicação se comunica com a API backend para criar sessões, enviar mensagens, receber respostas do chatbot e exibir o histórico da conversa na tela.
 
-## Principais responsabilidades
+---
 
-- Exibir a tela principal do chatbot;
+## Objetivo
+
+O objetivo deste frontend é fornecer uma interface simples, funcional e intuitiva para interação com o chatbot.
+
+A UI é responsável por:
+
 - Criar ou recuperar uma sessão de usuário;
 - Enviar mensagens para a API;
-- Exibir respostas do chatbot;
-- Mostrar histórico da conversa;
-- Indicar estado de carregamento enquanto a resposta é processada;
+- Exibir mensagens do usuário e respostas do chatbot;
+- Mostrar estado de carregamento enquanto a resposta é processada;
 - Tratar erros de comunicação com o backend;
-- Permitir iniciar uma nova conversa.
+- Permitir iniciar uma nova conversa;
+- Exibir o histórico da sessão atual.
+
+---
+
+## Repositório da API
+
+Este frontend depende da API backend do projeto.
+
+```txt
+https://github.com/JhonnatasRibeiroDev/llm-rag-group
