@@ -160,11 +160,11 @@ export function HistoryModal({
                     )}
                   >
                     {msg.role === 'user' ? (
-                      <div className="flex-shrink-0 w-7 h-7 rounded-md bg-[hsl(var(--muted))] flex items-center justify-center">
+                      <div className="shrink-0 w-7 h-7 rounded-md bg-[hsl(var(--muted))] flex items-center justify-center">
                         <User className="w-4 h-4 text-[hsl(var(--muted-foreground))]" />
                       </div>
                     ) : (
-                      <NexusLogo size="sm" className="flex-shrink-0 w-7 h-7" />
+                      <NexusLogo size="sm" className="shrink-0 w-7 h-7" />
                     )}
                     <div
                       className={cn(

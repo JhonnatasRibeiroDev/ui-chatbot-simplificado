@@ -3,7 +3,7 @@ import { NexusLogo } from './NexusLogo'
 import { ThemeToggle } from './ThemeToggle'
 import { useCallback, useState } from 'react'
 import { HistoryModal } from './HistoryModal'
-
+import { History } from 'lucide-react'
 interface ChatHeaderProps {
   sessionId: string
   onNewConversation: () => void
@@ -52,6 +52,16 @@ export function ChatHeader({ sessionId, onNewConversation }: ChatHeaderProps) {
         <ThemeToggle />
 
         <button
+          onClick={handleOpenHistory}
+          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))] hover:bg-[hsl(var(--muted))] transition-colors"
+        >
+          <History className="w-5 h-5" />
+          <span className="text-sm font-medium hidden sm:inline">
+            Histórico
+          </span>
+        </button>
+
+        <button
           onClick={onNewConversation}
           className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))] hover:bg-[hsl(var(--muted))] transition-colors"
         >
@@ -61,15 +71,6 @@ export function ChatHeader({ sessionId, onNewConversation }: ChatHeaderProps) {
           </span>
         </button>
 
-        <button
-          onClick={handleOpenHistory}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))] hover:bg-[hsl(var(--muted))] transition-colors"
-        >
-          <span className="text-sm font-medium hidden sm:inline">
-            Historico
-          </span>
-        </button>
-        
         <HistoryModal
           isOpen={isHistoryOpen}
           onClose={handleCloseHistory}

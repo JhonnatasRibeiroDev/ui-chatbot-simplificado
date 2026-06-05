@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect, type KeyboardEvent } from "react"
-import { Send } from "lucide-react"
+import { useState, useRef, useEffect, type KeyboardEvent } from 'react'
+import { Send } from 'lucide-react'
 
 interface ChatInputProps {
   onSendMessage: (message: string) => void
@@ -7,12 +7,12 @@ interface ChatInputProps {
 }
 
 export function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState('')
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = "auto"
+      textareaRef.current.style.height = 'auto'
       textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 150)}px`
     }
   }, [message])
@@ -20,12 +20,12 @@ export function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
   const handleSubmit = () => {
     if (message.trim() && !disabled) {
       onSendMessage(message.trim())
-      setMessage("")
+      setMessage('')
     }
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       handleSubmit()
     }
@@ -39,7 +39,7 @@ export function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
             <textarea
               ref={textareaRef}
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              onChange={e => setMessage(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Digite sua mensagem..."
               disabled={disabled}
@@ -50,7 +50,7 @@ export function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
           <button
             onClick={handleSubmit}
             disabled={!message.trim() || disabled}
-            className="flex-shrink-0 w-12 h-12 rounded-full bg-[hsl(var(--primary))] hover:bg-[hsl(174,72%,35%)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+            className="shrink-0 w-12 h-12 rounded-full bg-[hsl(var(--primary))] hover:bg-[hsl(174,72%,35%)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
           >
             <Send className="w-5 h-5 text-white" />
           </button>

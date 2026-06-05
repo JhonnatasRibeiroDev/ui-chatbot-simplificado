@@ -1,21 +1,21 @@
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils'
 
 interface NexusLogoProps {
   className?: string
-  size?: "sm" | "md" | "lg"
+  size?: 'sm' | 'md' | 'lg'
 }
 
-export function NexusLogo({ className, size = "md" }: NexusLogoProps) {
+export function NexusLogo({ className, size = 'md' }: NexusLogoProps) {
   const sizeClasses = {
-    sm: "w-8 h-8",
-    md: "w-12 h-12",
-    lg: "w-20 h-20",
+    sm: 'w-8 h-8',
+    md: 'w-12 h-12',
+    lg: 'w-20 h-20'
   }
 
   return (
     <div
       className={cn(
-        "flex items-center justify-center rounded-xl bg-gradient-to-br from-[hsl(174,72%,45%)] to-[hsl(174,72%,35%)]",
+        'flex items-center justify-center rounded-xl bg-linear-to-br from-[hsl(174,72%,45%)] to-[hsl(174,72%,35%)]',
         sizeClasses[size],
         className
       )}
