@@ -1,13 +1,19 @@
-import { NexusLogo } from "./NexusLogo"
-import { Loader2, User, Zap, Sparkles } from "lucide-react"
+import { NexusLogo } from './NexusLogo'
+import { Loader2, User, Zap, Sparkles } from 'lucide-react'
 
 const features = [
-  { icon: User, label: "Sessao Individual" },
-  { icon: Zap, label: "Respostas em Tempo Real" },
-  { icon: Sparkles, label: "IA Avancada" },
+  { icon: User, label: 'Sessao Individual' },
+  { icon: Zap, label: 'Respostas em Tempo Real' },
+  { icon: Sparkles, label: 'IA Avancada' }
 ]
 
-export function LoadingScreen() {
+interface LoadingScreenProps {
+  message?: string
+}
+
+export function LoadingScreen({
+  message = 'Carregando...'
+}: LoadingScreenProps) {
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center bg-[hsl(var(--background))]">
       <div className="flex flex-col items-center">
@@ -23,7 +29,7 @@ export function LoadingScreen() {
 
         <div className="flex items-center gap-2 text-[hsl(var(--muted-foreground))] mb-8">
           <Loader2 className="w-4 h-4 animate-spin" />
-          <span className="text-sm">Criando sua sessao...</span>
+          <span className="text-sm">{message}</span>
         </div>
 
         <div className="flex gap-3">
