@@ -4,8 +4,6 @@ Esta é a interface web (frontend) do projeto **Chatbot Simplificado Multiusuár
 
 O frontend se comunica com a API backend para gerenciar sessões, enviar mensagens, receber respostas e exibir o fluxo da conversa em tempo real.
 
----
-
 ## 🚀 Funcionalidades
 
 - **Interface Moderna e Responsiva**: Design premium com suporte a temas (Claro/Escuro) e micro-transições suaves.
@@ -13,8 +11,6 @@ O frontend se comunica com a API backend para gerenciar sessões, enviar mensage
 - **Histórico de Conversa**: Carregamento automático do histórico de mensagens da sessão ativa.
 - **Feedback Visual**: Indicadores de digitação e estados de carregamento (*loading screens*).
 - **Tratamento de Erros**: Feedback amigável em caso de falhas de comunicação com a API backend.
-
----
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -24,8 +20,6 @@ O frontend se comunica com a API backend para gerenciar sessões, enviar mensage
 - **Tailwind CSS v4** (Estilização moderna)
 - **Lucide React** (Pacote de ícones)
 
----
-
 ## 📋 Pré-requisitos
 
 Para rodar este projeto localmente, você precisará ter instalado em sua máquina:
@@ -33,7 +27,6 @@ Para rodar este projeto localmente, você precisará ter instalado em sua máqui
 - **Node.js** (versão 18 ou superior recomendada)
 - Um gerenciador de pacotes: **npm** ou **pnpm**
 
----
 
 ## ⚙️ Configuração do Ambiente
 
@@ -56,7 +49,6 @@ Para rodar este projeto localmente, você precisará ter instalado em sua máqui
 > [!IMPORTANT]
 > Certifique-se de que a API backend está rodando e acessível no endereço configurado na variável `VITE_API_URL`.
 
----
 
 ## 🏃 Como Executar o Projeto
 
@@ -96,7 +88,6 @@ pnpm run preview
 
 Após iniciar o servidor de desenvolvimento, a aplicação estará disponível por padrão no endereço: [http://localhost:5173](http://localhost:5173) (ou na porta indicada no seu terminal).
 
----
 
 ## 🔌 Integração com o Backend
 
