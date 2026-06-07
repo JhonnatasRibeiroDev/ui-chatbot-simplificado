@@ -3,6 +3,7 @@ import { X, Loader2, History, AlertCircle, RefreshCw } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { NexusLogo } from './NexusLogo'
 import { User } from 'lucide-react'
+import { fetchOptions } from '@/lib/cookieUtils'
 
 interface HistoryMessage {
   role: 'user' | 'assistant'
@@ -10,7 +11,6 @@ interface HistoryMessage {
 }
 
 interface HistoryResponse {
-  session_id: string
   history: HistoryMessage[]
 }
 
@@ -33,7 +33,7 @@ export function HistoryModal({
 
   const fetchHistory = async () => {
     if (!sessionId) {
-      setError('ID de sessao invalido')
+      setError('ID de sessão inválido')
       return
     }
 
@@ -43,14 +43,21 @@ export function HistoryModal({
 
     try {
       const response = await fetch(
-        `${apiBaseUrl}/api/sessions/${sessionId}/history`
+        `${apiBaseUrl}/api/sessions/${sessionId}/history`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          ...fetchOptions
+        }
       )
 
       if (!response.ok) {
         if (response.status === 404) {
-          throw new Error('Sessao nao encontrada ou sem historico')
+          throw new Error('Sessão não encontrada ou sem histórico')
         }
-        throw new Error('Erro ao buscar historico')
+        throw new Error('Erro ao buscar histórico')
       }
 
       const data: HistoryResponse = await response.json()
@@ -92,10 +99,10 @@ export function HistoryModal({
             <History className="w-5 h-5 text-[hsl(var(--primary))]" />
             <div>
               <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">
-                Historico da Sessao
+                Histórico da Sessão
               </h2>
               <p className="text-xs font-mono text-[hsl(var(--primary))]">
-                {sessionId}
+                {sessionId.substring(0, 12)}...
               </p>
             </div>
           </div>
@@ -128,7 +135,7 @@ export function HistoryModal({
             <div className="flex flex-col items-center justify-center py-12">
               <Loader2 className="w-8 h-8 text-[hsl(var(--primary))] animate-spin mb-3" />
               <p className="text-sm text-[hsl(var(--muted-foreground))]">
-                Buscando historico...
+                Buscando histórico...
               </p>
             </div>
           ) : error ? (
@@ -142,7 +149,9 @@ export function HistoryModal({
                 Tentar novamente
               </button>
             </div>
-          ) : historyData && historyData.history.length > 0 ? (
+          ) : historyData &&
+            historyData.history &&
+            historyData.history.length > 0 ? (
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-[hsl(var(--muted-foreground))]">
@@ -184,7 +193,7 @@ export function HistoryModal({
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <History className="w-12 h-12 text-[hsl(var(--muted-foreground))] mb-3" />
               <p className="text-sm text-[hsl(var(--muted-foreground))]">
-                Nenhuma mensagem nesta sessao ainda
+                Nenhuma mensagem nesta sessão ainda
               </p>
             </div>
           )}

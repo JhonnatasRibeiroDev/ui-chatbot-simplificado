@@ -1,10 +1,14 @@
 // Enviar mensagem ao chat
-// Envia uma mensagem para uma sessao existente. O backend salva a mensagem do usuario, envia a mensagem e o historico da sessao ao LLM configurado e salva a resposta do assistente.
+// Envia uma mensagem para uma sessão existente. O backend salva a mensagem do usuário,
+// envia a mensagem e o histórico da sessão ao LLM configurado e salva a resposta do assistente.
 
 // Metodo: POST
-// Rota: /api/chat
-// Objetivo: enviar uma mensagem do usuario e receber a resposta do chatbot.
-// Corpo da requisicao: JSON com session_id e message.
+// Rota: /api/sessions/{session_id}/messages
+// Objetivo: enviar uma mensagem do usuário e receber a resposta do chatbot.
+// Corpo da requisição: JSON com message.
+// Resposta: JSON com response (mensagem do assistente)
+
+import { fetchOptions } from '@/lib/cookieUtils'
 
 // Definição do tipo para as variáveis de ambiente
 declare global {
@@ -24,16 +28,19 @@ export async function sendChatMessage(
   message: string
 ): Promise<string> {
   try {
-    const response = await fetch(`${API_URL}/api/chat`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        session_id: sessionId,
-        message: message
-      })
-    })
+    const response = await fetch(
+      `${API_URL}/api/sessions/${sessionId}/messages`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: message
+        }),
+        ...fetchOptions
+      }
+    )
 
     if (!response.ok) {
       throw new Error('Falha ao enviar mensagem')
