@@ -1,6 +1,6 @@
 # UI Chatbot Simplificado 💬✨
 
-Esta é a interface web (frontend) do projeto **Chatbot Simplificado Multiusuário**, desenvolvida em **React** + **Vite** + **TypeScript** e estilizada com **Tailwind CSS**. A aplicação oferece uma interface fluida, moderna e responsiva para que diferentes usuários possam interagir com um chatbot baseado em Large Language Models (LLM), mantendo o histórico de suas respectivas sessões de conversa.
+Esta é a interface web (frontend) do projeto **Chatbot Simplificado Multiusuário**, desenvolvida em **React** + **Vite** + **TypeScript** e estilizada com **Tailwind CSS**. A aplicação oferece uma interface fluida, moderna e responsiva para que diferentes usuários possam interagir com um chatbot baseado em Models (LLM), mantendo o histórico de suas respectivas sessões de conversa.
 
 O frontend se comunica com a API backend para gerenciar sessões, enviar mensagens, receber respostas e exibir o fluxo da conversa em tempo real.
 
