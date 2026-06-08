@@ -47,11 +47,22 @@ export function ChatInterface() {
         const savedSessionId = getSessionCookie()
 
         if (savedSessionId) {
-          // Usar a sessão existente
-          setSessionId(savedSessionId)
           const history = await fetchSessionHistory(savedSessionId)
-          setMessages(history)
-          // Carregar todas as sessões do cliente
+
+          if (history === null) {
+            // Sessão do cookie não existe mais no servidor — criar nova
+            setLoadingMessage('Criando nova sessão...')
+            clearSessionCookie()
+            const response: SessionResponse = await createNewSession()
+            setSessionId(response.session_id)
+            setClientId(response.client_id)
+            saveSessionCookie(response.session_id)
+            setMessages([])
+          } else {
+            setSessionId(savedSessionId)
+            setMessages(history)
+          }
+
           const sessions = await fetchAllSessions()
           setAllSessions(sessions)
         } else {
@@ -66,7 +77,7 @@ export function ChatInterface() {
           // O backend irá gravar o cookie client_id automaticamente
           // Carregar histórico da sessão (provavelmente vazio no início)
           const history = await fetchSessionHistory(response.session_id)
-          setMessages(history)
+          setMessages(history ?? [])
           // Carregar todas as sessões do cliente
           const sessions = await fetchAllSessions()
           setAllSessions(sessions)
@@ -160,7 +171,7 @@ export function ChatInterface() {
       setSessionId(selectedSessionId)
       saveSessionCookie(selectedSessionId)
       const history = await fetchSessionHistory(selectedSessionId)
-      setMessages(history)
+      setMessages(history ?? [])
     } catch (error) {
       console.error('Erro ao selecionar sessão:', error)
     } finally {
