@@ -60,9 +60,11 @@ export async function createNewSession(): Promise<SessionResponse> {
   }
 }
 
+// Retorna null se a sessão não existe no servidor (404).
+// Retorna [] se a sessão existe mas não tem mensagens.
 export async function fetchSessionHistory(
   sessionId: string
-): Promise<Message[]> {
+): Promise<Message[] | null> {
   try {
     const response = await fetch(
       `${API_URL}/api/sessions/${sessionId}/history`,
@@ -74,6 +76,10 @@ export async function fetchSessionHistory(
         ...fetchOptions
       }
     )
+
+    if (response.status === 404) {
+      return null
+    }
 
     if (!response.ok) {
       throw new Error('Falha ao carregar histórico')
