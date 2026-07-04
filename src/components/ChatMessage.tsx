@@ -1,6 +1,8 @@
 import { NexusLogo } from './NexusLogo'
 import { cn } from '@/lib/utils'
 import { User } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 export interface Message {
   id: string
@@ -39,9 +41,37 @@ export function ChatMessage({ message }: ChatMessageProps) {
             : 'bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))] border border-[hsl(var(--border))]'
         )}
       >
-        <p className="text-sm leading-relaxed whitespace-pre-wrap">
-          {message.content}
-        </p>
+        <div className="text-sm leading-relaxed">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              p: ({ node, ...props }) => <p className="m-0" {...props} />, 
+              code: ({ inline, className, children, ...props }) =>
+                inline ? (
+                  <code
+                    className={cn(
+                      'rounded bg-[hsl(var(--muted))] px-1 py-[0.15rem] text-[0.93em]',
+                      className
+                    )}
+                    {...props}
+                  >
+                    {children}
+                  </code>
+                ) : (
+                  <pre className="overflow-x-auto rounded-lg bg-[hsl(var(--muted))] p-3 text-xs">
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  </pre>
+                ),
+              a: ({ node, ...props }) => (
+                <a className="text-[hsl(var(--primary))] underline" {...props} />
+              )
+            }}
+          >
+            {message.content}
+          </ReactMarkdown>
+        </div>
       </div>
     </div>
   )
